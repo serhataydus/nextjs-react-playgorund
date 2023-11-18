@@ -6,7 +6,7 @@ import { IEmptyBasicElementProps } from "./EmptyBasicElement.model";
 const EmptyBasicElement: React.FC<IEmptyBasicElementProps> = (props) => {
   return (
     <div data-testid={props.dataTestId} data-traceid={props.dataTraceId}>
-      empty element
+      {props.children}
     </div>
   );
 };
