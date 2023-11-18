@@ -1,0 +1,9 @@
+{
+  "variables": [
+    {
+      "prompt": "Enter a name for the server side component (string: ComponentName)",
+      "name": "componentname",
+      "optional": false
+    }
+  ]
+}
