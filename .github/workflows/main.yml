@@ -6,7 +6,7 @@ on:
       - dev
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,20 +26,18 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Check if Tag Exists
-        id: check_tag
-        run: echo ::set-output name=TAG_EXISTS::$(npm show <package-name> version | grep -Fx "$(npm version patch)")
-
-      - name: Delete Existing Tag
-        if: steps.check_tag.outputs.TAG_EXISTS != ''
-        run: git tag -d $(npm version patch)
+      - name: Login to npm
+        run: npm login --registry=https://registry.npmjs.org --scope=serhataydus --always-auth --email=serhataydus@hotmail.com
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Bump Version and Publish
         run: |
           git pull
           git reset --hard HEAD
           git clean -fd
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
-          npm publish --access public
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          npm version minor
+          npm publish --access restricted --scope=your-scope
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
