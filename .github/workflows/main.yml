@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
 
@@ -23,7 +23,7 @@ jobs:
 
       - name: Check if Tag Exists
         id: check_tag
-        run: echo ::set-output name=TAG_EXISTS::$(git tag -l "$(npm version patch)")
+        run: echo ::set-output name=TAG_EXISTS::$(npm show <package-name> version | grep -Fx "$(npm version patch)")
 
       - name: Delete Existing Tag
         if: steps.check_tag.outputs.TAG_EXISTS != ''
