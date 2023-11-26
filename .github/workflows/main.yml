@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "20.x"
+          node-version: "20"
 
       - name: Install Dependencies
         run: npm install
@@ -33,6 +33,8 @@ jobs:
         run: |
           git pull
           npm version patch
+          git reset --hard HEAD
+          git clean -fd
           echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
           npm publish --access public
         env:
