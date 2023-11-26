@@ -1,4 +1,4 @@
-name: Nextjs-React-Playgorund Project Update Common Package
+name: Nextjs-React-Playground Project Update Common Package
 
 on:
   push:
@@ -20,6 +20,14 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+
+      - name: Check if Tag Exists
+        id: check_tag
+        run: echo ::set-output name=TAG_EXISTS::$(git tag -l "$(npm version patch)")
+
+      - name: Delete Existing Tag
+        if: steps.check_tag.outputs.TAG_EXISTS != ''
+        run: git tag -d $(npm version patch)
 
       - name: Bump Version and Publish
         run: |
