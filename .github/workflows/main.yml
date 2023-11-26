@@ -39,7 +39,8 @@ jobs:
           git pull
           git reset --hard HEAD
           git clean -fd
-          npm version patch
+          npm version minor
+          npm version minor
           echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
           npm publish --access public
         env:
