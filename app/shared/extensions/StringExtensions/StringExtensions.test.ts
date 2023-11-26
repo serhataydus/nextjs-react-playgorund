@@ -11,6 +11,11 @@ describe("toCamelCase Function Tests", () => {
     expect(StringExtensions.toCamelCase(inputString)).toBe(inputString);
   });
 
+  it("should handle empty string", () => {
+    const inputString = " ";
+    expect(StringExtensions.toCamelCase(inputString)).toBe(inputString);
+  });
+
   it("should handle single-character string", () => {
     const inputString = "A";
     expect(StringExtensions.toCamelCase(inputString)).toBe(inputString);
