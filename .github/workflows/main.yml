@@ -38,6 +38,6 @@ jobs:
           git clean -fd
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           npm version minor
-          npm publish --access restricted --scope=your-scope
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
