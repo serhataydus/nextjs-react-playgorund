@@ -36,8 +36,8 @@ jobs:
           git pull
           git reset --hard HEAD
           git clean -fd
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           npm version minor
           npm publish --access public
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
