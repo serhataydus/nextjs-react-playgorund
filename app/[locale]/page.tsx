@@ -1,4 +1,4 @@
-import { getDictionary } from "@/localizations/dictionary";
+import { getLocalizations } from "@/localizations/dictionary";
 import { IProps } from "@/models/page/IProps";
 import { NextPage } from "next";
 import Head from "next/head";
@@ -8,18 +8,18 @@ const Home: NextPage<IProps> = async (pageProps: IProps) => {
   const language = pageProps.params.locale;
   const dynamicUrl = pageProps.params.params?.join("/");
   const dynamicUrlParams = new URLSearchParams(pageProps.searchParams).toString();
-  const { page } = await getDictionary(language)|| {};
+const {title,description} = await getLocalizations(language);
 
   return (
     <>
     <Head>
-        <title>Home - {page?.about.title}</title>
+        <title>Home - {title}</title>
       </Head>
       <h1>Translations</h1>
       <section className="py-24">
         <div className="container">
-          <h1 className="text-3xl font-bold">{page?.about.title}</h1>
-          <p className="text-gray-500">{page?.about.description}</p>
+          <h1 className="text-3xl font-bold">{title}</h1>
+          <p className="text-gray-500">{description}</p>
         </div>
       </section>
       <hr />

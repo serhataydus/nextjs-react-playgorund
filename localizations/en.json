@@ -1,8 +1,4 @@
 {
-  "page": {
-    "about": {
-      "title": "About Us",
-      "description": "This is the about page"
-    }
-  }
+  "description": "Welcome to our homepage",
+  "title": "Homepage"
 }
